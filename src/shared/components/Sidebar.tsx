@@ -16,6 +16,9 @@ import {
 	FieldTimeOutlined,
 	FileDoneOutlined,
 	PercentageOutlined,
+	MenuUnfoldOutlined,
+	MenuFoldOutlined,
+	MenuOutlined,
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import Link from 'next/link';
@@ -34,6 +37,7 @@ type Props = {
 	menu?: any;
 	isSidebarCollapsed: boolean;
 	onCollapse: any;
+	setIsSideBarCollapsed: any;
 };
 
 const items = [
@@ -121,6 +125,7 @@ const SidebarComponent = ({
 	menu = [],
 	isSidebarCollapsed,
 	onCollapse,
+	setIsSideBarCollapsed,
 }: Props) => {
 	const route = useRouter();
 	const handleLogout = () => {
@@ -129,25 +134,38 @@ const SidebarComponent = ({
 	};
 	return (
 		<Sider
-			// trigger={null}
+			trigger={null}
 			collapsible
 			collapsed={isSidebarCollapsed}
 			onCollapse={onCollapse}
 			width="250"
-			style={{ boxShadow: '0 4px 10px rgb(0 0 0 / 15%)' }}
-			theme="light"
+			style={{ boxShadow: '0 4px 10px rgb(0 0 0 / 15%)', backgroundColor: '#330D54' }}
+			theme="dark"
+
 		>
 			{/* <div className="logo" /> */}
-			<Row justify="center" align="middle">
-				<Col>
-					<h1 style={{ color: '#000', padding: '0.5rem 0' }}>Logo</h1>
+			<Row justify="space-between" align="middle" style={{ padding: '0.5rem 20px' }}>
+				{!isSidebarCollapsed && <Col >
+					<h1 style={{ color: '#fff', margin: '0' }}>CONSOLE</h1>
+
+				</Col>}
+
+				<Col style={{color:'#fff', margin:`${isSidebarCollapsed ? '0 auto': '0' }`}}>
+					{React.createElement(
+						MenuOutlined,
+						{
+							className: 'trigger',
+							onClick: () => setIsSideBarCollapsed(!isSidebarCollapsed),
+						},
+					)}
 				</Col>
 			</Row>
 			<Menu
 				defaultSelectedKeys={['/dashboard']}
 				defaultOpenKeys={['/dashboard']}
 				mode="inline"
-				theme="light"
+				theme="dark"
+				style={{ backgroundColor: '#330D54' }}
 				// style={{ position: 'sticky' }}
 				onClick={({ key }) => {
 					if (key === 'signout') {

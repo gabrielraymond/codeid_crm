@@ -1,8 +1,16 @@
 import { DownloadOutlined } from '@ant-design/icons';
-import { Button, Input, Select, Space, Table, Tag, Tree } from 'antd';
+import { Button, Collapse, Input, Select, Space, Table, Tag, Tree } from 'antd';
 import React from 'react';
 import HeaderPage from 'src/shared/components/HeaderPage';
 import type { DataNode, DirectoryTreeProps } from 'antd/es/tree';
+import CoaTable from './coaTable';
+const { Panel } = Collapse;
+
+const text = `
+  A dog is a type of domesticated animal.
+  Known for its loyalty and faithfulness,
+  it can be found as a welcome guest in many households across the world.
+`;
 const { Search } = Input;
 const { Option } = Select;
 const { DirectoryTree } = Tree;
@@ -85,63 +93,84 @@ const CoaListing = () => {
 		console.log('Trigger Expand', keys, info);
 	};
 
+	const children: React.ReactNode[] = [];
+	for (let i = 10; i < 36; i++) {
+		children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
+	}
+
+	const handleChange = (value: string[]) => {
+		console.log(`selected ${value}`);
+	};
+
+
+
+
 	return (
 		<div>
 			<HeaderPage title="COA LISTING" />
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 				<div>
-					<Select
-						showSearch
-						placeholder="Select a person"
-						optionFilterProp="children"
-						onChange={onChange}
-						onSearch={onSearchSelect}
-						filterOption={(input, option) =>
-							(option!.children as unknown as string)
-								.toLowerCase()
-								.includes(input.toLowerCase())
-						}
-						style={{ marginRight: '10px' }}
-					>
-						<Option value="jack">Jack</Option>
-						<Option value="lucy">Lucy</Option>
-						<Option value="tom">Tom</Option>
-					</Select>
-					<Select
-						showSearch
-						placeholder="Select a person"
-						optionFilterProp="children"
-						onChange={onChange}
-						onSearch={onSearchSelect}
-						filterOption={(input, option) =>
-							(option!.children as unknown as string)
-								.toLowerCase()
-								.includes(input.toLowerCase())
-						}
-						style={{ marginRight: '10px' }}
-					>
-						<Option value="jack">Jack</Option>
-						<Option value="lucy">Lucy</Option>
-						<Option value="tom">Tom</Option>
-					</Select>
 					<Button type="primary" style={{ marginRight: '10px' }}>
-						Primary Button
+						Create New
 					</Button>
 					<Button
-						type="primary"
-						style={{ backgroundColor: 'blue', marginRight: '10px' }}
-						icon={<DownloadOutlined />}
+						color='green'
+						style={{ borderColor: 'green', color: 'green !important', backgroundColor: 'transparent' }}
+					// icon={<DownloadOutlined />}
 					>
-						Download
+						Export to Excel
 					</Button>
+
+
 				</div>
 				<div>
-					<Search
-						placeholder="input search text"
-						onSearch={onSearch}
-						enterButton
-						style={{ width: '300px' }}
-					/>
+					<Search placeholder="input search text" onSearch={onSearch} style={{ width: 200 }} />
+					{/* <Select
+						showSearch
+						placeholder="Select a person"
+						optionFilterProp="children"
+						onChange={onChange}
+						onSearch={onSearchSelect}
+						filterOption={(input, option) =>
+							(option!.children as unknown as string)
+								.toLowerCase()
+								.includes(input.toLowerCase())
+						}
+						style={{ margin: '0 10px' }}
+					>
+						<Option value="jack">Jack</Option>
+						<Option value="lucy">Lucy</Option>
+						<Option value="tom">Tom</Option>
+					</Select> */}
+					<Select
+						mode="multiple"
+						allowClear
+						style={{ width: 200, margin: '0 10px' }}
+						placeholder="Please select"
+						defaultValue={['a10', 'c12']}
+						onChange={handleChange}
+						showArrow
+					>
+						{children}
+					</Select>
+					<Select
+						showSearch
+						placeholder="Select a person"
+						optionFilterProp="children"
+						onChange={onChange}
+						onSearch={onSearchSelect}
+						style={{ width: 200 }}
+						filterOption={(input, option) =>
+							(option!.children as unknown as string)
+								.toLowerCase()
+								.includes(input.toLowerCase())
+						}
+
+					>
+						<Option value="jack">Jack</Option>
+						<Option value="lucy">Lucy</Option>
+						<Option value="tom">Tom</Option>
+					</Select>
 				</div>
 			</div>
 			<div
@@ -149,21 +178,37 @@ const CoaListing = () => {
 					display: 'flex',
 					marginTop: '2rem',
 					justifyContent: 'space-between',
-					backgroundColor: '#eaea',
-					padding: '5px',
+
 				}}
 			>
-				<div style={{ width: '15%' }}>
-					<DirectoryTree
+				<div style={{ width: '20%' }}>
+					{/* <DirectoryTree
 						multiple
 						defaultExpandAll
 						onSelect={onSelect}
 						onExpand={onExpand}
 						treeData={treeData}
-					/>
+					/> */}
+					<Collapse accordion>
+						<Panel header="This is panel header 1" key="1">
+							<DirectoryTree
+								multiple
+								defaultExpandAll
+								onSelect={onSelect}
+								onExpand={onExpand}
+								treeData={treeData}
+							/>
+						</Panel>
+						<Panel header="This is panel header 2" key="2">
+							<p>{text}</p>
+						</Panel>
+						<Panel header="This is panel header 3" key="3">
+							<p>{text}</p>
+						</Panel>
+					</Collapse>
 				</div>
-				<div style={{ width: '84%' }}>
-					<Table dataSource={data}>
+				<div style={{ width: '79%' }}>
+					{/* <Table dataSource={data}>
 						<ColumnGroup title="Name">
 							<Column
 								title="First Name"
@@ -198,7 +243,8 @@ const CoaListing = () => {
 								</Space>
 							)}
 						/>
-					</Table>
+					</Table> */}
+					<CoaTable />
 				</div>
 			</div>
 		</div>

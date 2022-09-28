@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Layout, Menu } from 'antd';
+import { Avatar, Image, Layout, Menu, Row } from 'antd';
 import {
+	ExportOutlined,
 	MenuFoldOutlined,
 	MenuUnfoldOutlined,
 	UploadOutlined,
@@ -11,6 +12,7 @@ import HeaderComponent from './Header';
 import SidebarComponent from './Sidebar';
 import { Header } from 'antd/lib/layout/layout';
 import type { MenuProps } from 'antd';
+import Link from 'next/link';
 
 const { Content } = Layout;
 
@@ -51,31 +53,38 @@ const LayoutComponent = ({ children, isShow }: Props) => {
 			<SidebarComponent
 				isSidebarCollapsed={isSidebarCollapsed}
 				onCollapse={onCollapse}
+				setIsSideBarCollapsed={setIsSideBarCollapsed}
 			/>
-			{/* <Layout className="site-layout"> */}
-			{/* <Header
+			<Layout className="site-layout">
+				<Header
 					className="site-layout-background"
-					style={{ padding: '0 1.5rem', background: '#fff' }}
+					style={{ padding: '0 1.5rem', background: '#fff', justifyContent: 'end', alignItems: 'center', display: 'flex' }}
 				>
-					{React.createElement(
+					{/* {React.createElement(
 						isSidebarCollapsed ? MenuUnfoldOutlined : MenuFoldOutlined,
 						{
 							className: 'trigger',
 							onClick: () => setIsSideBarCollapsed(!isSidebarCollapsed),
 						},
-					)}
-				</Header> */}
-			<Content
-				className="site-layout-background"
-				style={{
-					padding: '1rem 2rem ',
-					minHeight: 280,
-					overflowY: 'scroll',
-				}}
-			>
-				{children}
-			</Content>
-			{/* </Layout> */}
+					)} */}
+					{/* <p>test</p> */}
+					<Link href="/"><a><ExportOutlined style={{ marginRight: '2rem', color:'#0e0e0e' }} /></a></Link>
+
+					<Avatar src={<Image src="https://joeschmoe.io/api/v1/random" style={{ width: 32 }} />} />
+
+
+				</Header>
+				<Content
+					className="site-layout-background"
+					style={{
+						padding: '1rem 2rem ',
+						minHeight: 280,
+						overflowY: 'scroll',
+					}}
+				>
+					{children}
+				</Content>
+			</Layout>
 			{/* <Layout hasSider>
 				<SidebarComponent
 					isSidebarCollapsed={isSidebarCollapsed}

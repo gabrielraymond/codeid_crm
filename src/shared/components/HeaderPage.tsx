@@ -13,7 +13,7 @@ const HeaderPage = (props: Props) => {
 		<>
 			<PageHeader
 				className="site-page-header"
-				onBack={() => router.back()}
+				// onBack={() => router.back()}
 				title={title}
 				// subTitle="This is a subtitle"
 				style={{ padding: '1rem 0', fontSize: '21px', margin: '0 5px' }}
