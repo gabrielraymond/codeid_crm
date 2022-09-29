@@ -124,8 +124,37 @@ const items = [
 		icon: <FileDoneOutlined />,
 	},
 	{
-		label: 'JURNAL AJE',
-		key: '/dashboard/jurnal-aje',
+		label: 'JURNAL',
+		key: 'jurnal',
+		icon: <UserOutlined />,
+		children: [
+			{
+				label: 'AJE',
+				key: '/dashboard/jurnal/aje',
+			},
+			{
+				label: 'PERFORMA MODAL',
+				key: '/dashboard/jurnal/performa-modal',
+			},
+			{
+				label: 'CTE',
+				key: '/dashboard/jurnal/cte',
+			},
+			{
+				label: 'ELIM',
+				key: '/dashboard/jurnal/elim',
+			},
+		],
+	},
+
+	{
+		label: 'UPLOAD AGING UTANG PIUTANG',
+		key: '/dashboard/upload-aging-utang-piutang',
+		icon: <FieldTimeOutlined />,
+	},
+	{
+		label: 'UPLOAD MUTASI PERSEDIAAN',
+		key: '/dashboard/upload-mutasi-persediaan',
 		icon: <FieldTimeOutlined />,
 	},
 	{ label: 'Logout', key: 'signout', icon: <PoweroffOutlined /> },

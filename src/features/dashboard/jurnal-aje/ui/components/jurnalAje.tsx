@@ -11,6 +11,7 @@ import React, { useState } from 'react';
 import HeaderPage from 'src/shared/components/HeaderPage';
 import { DatePicker, Space } from 'antd';
 import { Option } from 'antd/lib/mentions';
+import TableAje from './tableAje';
 
 const { Search } = Input;
 
@@ -135,6 +136,9 @@ const JurnalAjeComponents = () => {
 						</Space>
 					</div>
 				</div>
+			</div>
+			<div>
+				<TableAje />
 			</div>
 		</div>
 	);
