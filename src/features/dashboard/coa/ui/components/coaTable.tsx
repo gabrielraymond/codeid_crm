@@ -95,25 +95,25 @@ const CoaTable = () => {
         {
             title: 'Code COA',
             dataIndex: 'code_coa',
-            defaultSortOrder: 'descend',
+            // defaultSortOrder: 'descend',
             sorter: (a, b) => a.code_coa - b.code_coa,
         },
         {
             title: 'Nama COA',
             dataIndex: 'nama_coa',
-            defaultSortOrder: 'descend',
+            // defaultSortOrder: 'descend',
             sorter: (a, b) => a.nama_coa - b.nama_coa,
         },
         {
             title: 'Tipe',
             dataIndex: 'tipe',
-            defaultSortOrder: 'descend',
+            // defaultSortOrder: 'descend',
             sorter: (a, b) => a.tipe - b.tipe,
         },
         {
             title: 'Group',
             dataIndex: 'group',
-            defaultSortOrder: 'descend',
+            // defaultSortOrder: 'descend',
             sorter: (a, b) => a.group - b.group,
         },
         {

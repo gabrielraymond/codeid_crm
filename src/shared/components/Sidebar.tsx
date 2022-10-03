@@ -133,6 +133,10 @@ const items = [
 				key: '/dashboard/jurnal/aje',
 			},
 			{
+				label: 'AJE Entry',
+				key: '/dashboard/jurnal/aje/entry/keyid',
+			},
+			{
 				label: 'PERFORMA MODAL',
 				key: '/dashboard/jurnal/performa-modal',
 			},

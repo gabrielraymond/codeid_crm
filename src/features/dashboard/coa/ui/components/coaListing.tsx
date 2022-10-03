@@ -1,6 +1,6 @@
 import { DownloadOutlined } from '@ant-design/icons';
 import { Button, Collapse, Input, Select, Space, Table, Tag, Tree } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import HeaderPage from 'src/shared/components/HeaderPage';
 import type { DataNode, DirectoryTreeProps } from 'antd/es/tree';
 import CoaTable from './coaTable';
@@ -71,19 +71,32 @@ const data: DataType[] = [
 ];
 
 const CoaListing = () => {
-	const onSearch = (value: string) => {
-		console.log('lol');
-	};
-
 	const { Option } = Select;
 
-	const onChange = (value: string) => {
-		console.log(`selected ${value}`);
+	const [searchVal, setSearchVal] = useState<string>('');
+	const [filterVal, setFilterVal] = useState<string[]>([]);
+	const [groupFilter, setGroupFilter] = useState<string>('');
+
+	// seach form
+	const onSearch = (value: string) => {
+		console.log(value);
+		setSearchVal(value);
 	};
 
-	const onSearchSelect = (value: string) => {
-		console.log('search:', value);
+	// select filter
+	const handleChange = (value: string[]) => {
+		console.log(value);
+		setFilterVal(value);
 	};
+
+	// select group
+	const onChange = (value: string) => {
+		console.log(`selected ${value}`);
+		setGroupFilter(value);
+	};
+	// const onSearchSelect = (value: string) => {
+	// 	console.log('search:', value);
+	// };
 
 	const onSelect: DirectoryTreeProps['onSelect'] = (keys, info) => {
 		console.log('Trigger Select', keys, info);
@@ -95,15 +108,10 @@ const CoaListing = () => {
 
 	const children: React.ReactNode[] = [];
 	for (let i = 10; i < 36; i++) {
-		children.push(<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>);
+		children.push(
+			<Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>,
+		);
 	}
-
-	const handleChange = (value: string[]) => {
-		console.log(`selected ${value}`);
-	};
-
-
-
 
 	return (
 		<div>
@@ -114,17 +122,23 @@ const CoaListing = () => {
 						Create New
 					</Button>
 					<Button
-						color='green'
-						style={{ borderColor: 'green', color: 'green !important', backgroundColor: 'transparent' }}
-					// icon={<DownloadOutlined />}
+						color="green"
+						style={{
+							borderColor: 'green',
+							color: 'green !important',
+							backgroundColor: 'transparent',
+						}}
+						// icon={<DownloadOutlined />}
 					>
 						Export to Excel
 					</Button>
-
-
 				</div>
 				<div>
-					<Search placeholder="input search text" onSearch={onSearch} style={{ width: 200 }} />
+					<Search
+						placeholder="Search Here..."
+						onSearch={onSearch}
+						style={{ width: 200 }}
+					/>
 					{/* <Select
 						showSearch
 						placeholder="Select a person"
@@ -146,8 +160,7 @@ const CoaListing = () => {
 						mode="multiple"
 						allowClear
 						style={{ width: 200, margin: '0 10px' }}
-						placeholder="Please select"
-						defaultValue={['a10', 'c12']}
+						placeholder="Filter by"
 						onChange={handleChange}
 						showArrow
 					>
@@ -155,17 +168,16 @@ const CoaListing = () => {
 					</Select>
 					<Select
 						showSearch
-						placeholder="Select a person"
+						placeholder="Group by"
 						optionFilterProp="children"
 						onChange={onChange}
-						onSearch={onSearchSelect}
+						// onSearch={onSearchSelect}
 						style={{ width: 200 }}
 						filterOption={(input, option) =>
 							(option!.children as unknown as string)
 								.toLowerCase()
 								.includes(input.toLowerCase())
 						}
-
 					>
 						<Option value="jack">Jack</Option>
 						<Option value="lucy">Lucy</Option>
@@ -178,7 +190,6 @@ const CoaListing = () => {
 					display: 'flex',
 					marginTop: '2rem',
 					justifyContent: 'space-between',
-
 				}}
 			>
 				<div style={{ width: '20%' }}>
